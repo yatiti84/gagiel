@@ -10,6 +10,7 @@ import { config } from '@keystone-6/core';
 
 // Look in the schema file for how we define our lists, and how users interact with them through graphql or the Admin UI
 import { lists } from './schema';
+import { sessionSetting, database, app } from './configs/config'
 
 // Keystone auth is configured separately - check out the basic auth setup we are importing from our auth file.
 import { withAuth, session } from './auth';
@@ -19,13 +20,17 @@ export default withAuth(
   config({
     // the db sets the database provider - we're using sqlite for the fastest startup experience
     db: {
-      provider: 'postgresql',
-      url: 'postgres://hcchien:@localhost/soapbox',
+      provider: database.provider ||  'postgresql',
+      url: 
+		database.url ||  
+		'postgres://hcchien:@localhost/soapbox',
+	  idField: { kind: 'autoincrement' }, 
     },
     // This config allows us to set up features of the Admin UI https://keystonejs.com/docs/apis/config#ui
     ui: {
       // For our starter, we check that someone has session data before letting them see the Admin UI.
       isAccessAllowed: (context) => !!context.session?.data,
+	  isDisabled: app.disableAdminUi || false,
     },
     lists,
     session,

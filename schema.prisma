@@ -12,21 +12,21 @@ generator client {
 }
 
 model User {
-  id       String @id @default(cuid())
+  id       Int    @id @default(autoincrement())
   name     String @default("")
   email    String @unique @default("")
   password String
 }
 
 model Category {
-  id      String @id @default(cuid())
+  id      Int    @id @default(autoincrement())
   title   String @default("")
   slug    String @default("")
   summary String @default("")
 }
 
 model Publisher {
-  id                           String   @id @default(cuid())
+  id                           Int      @id @default(autoincrement())
   title                        String   @default("")
   official_site                String   @default("")
   rss                          String   @default("")
@@ -39,15 +39,15 @@ model Publisher {
 }
 
 model Story {
-  id                 String     @id @default(cuid())
+  id                 Int        @id @default(autoincrement())
   title              String     @default("")
   url                String     @default("")
   summary            String     @default("")
   content            String     @default("")
   source             Publisher? @relation("Story_source", fields: [sourceId], references: [id])
-  sourceId           String?    @map("source")
+  sourceId           Int?       @map("source")
   author             Member?    @relation("Story_author", fields: [authorId], references: [id])
-  authorId           String?    @map("author")
+  authorId           Int?       @map("author")
   published_date     DateTime?
   og_title           String     @default("")
   og_image           String     @default("")
@@ -60,11 +60,11 @@ model Story {
 }
 
 model Pick {
-  id          String    @id @default(cuid())
+  id          Int       @id @default(autoincrement())
   member      Member?   @relation("Pick_member", fields: [memberId], references: [id])
-  memberId    String?   @map("member")
+  memberId    Int?      @map("member")
   story       Story?    @relation("Pick_story", fields: [storyId], references: [id])
-  storyId     String?   @map("story")
+  storyId     Int?      @map("story")
   comment     String    @default("")
   picked_date DateTime?
   kind        String?   @default("read")
@@ -76,7 +76,7 @@ model Pick {
 }
 
 model Member {
-  id                    String      @id @default(cuid())
+  id                    Int         @id @default(autoincrement())
   firebaseId            String      @default("")
   name                  String      @default("")
   nickname              String      @default("")
@@ -91,14 +91,14 @@ model Member {
 }
 
 model Comment {
-  id                  String    @id @default(cuid())
+  id                  Int       @id @default(autoincrement())
   story               Story?    @relation("Comment_story", fields: [storyId], references: [id])
-  storyId             String?   @map("story")
+  storyId             Int?      @map("story")
   content             String    @default("")
   parent              Comment?  @relation("Comment_parent", fields: [parentId], references: [id])
-  parentId            String?   @map("parent")
+  parentId            Int?      @map("parent")
   root                Comment?  @relation("Comment_root", fields: [rootId], references: [id])
-  rootId              String?   @map("root")
+  rootId              Int?      @map("root")
   state               String?   @default("public")
   published_date      DateTime?
   from_Comment_parent Comment[] @relation("Comment_parent")
@@ -110,14 +110,14 @@ model Comment {
 }
 
 model Topic {
-  id                          String   @id @default(cuid())
+  id                          Int      @id @default(autoincrement())
   title                       String   @default("")
   slug                        String   @default("")
   summary                     String   @default("")
   public                      String?
   format                      String?
   creator                     Member?  @relation("Topic_creator", fields: [creatorId], references: [id])
-  creatorId                   String?  @map("creator")
+  creatorId                   Int?     @map("creator")
   from_Member_following_topic Member[] @relation("Member_following_topic")
 
   @@index([creatorId])
