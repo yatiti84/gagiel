@@ -27,8 +27,8 @@ export const member = list ({
 	    ref: 'Member',
 		many: true,
 	  }),
-	  following_topic: relationship({
-	    ref: 'Topic',
+	  following_collection: relationship({
+	    ref: 'Collection',
 		many: true,
 	  }),
 	  follow_publisher: relationship({

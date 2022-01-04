@@ -6,6 +6,7 @@ import {
   password,
   timestamp,
   select,
+  checkbox,
 } from '@keystone-6/core/fields';
 
 export const story = list ({
@@ -16,10 +17,14 @@ export const story = list ({
       content: text({ validation: { isRequired: false } }),
 	  source: relationship({ ref: 'Publisher', many: false }),
 	  author: relationship({ ref: 'Member', many: false }),
+	  category: relationship({ ref: 'Category', many: false }),
       published_date: timestamp({ validation: { isRequired: false } }),
       og_title: text({ validation: { isRequired: false } }),
       og_image: text({ validation: { isRequired: false } }),
       og_description: text({ validation: { isRequired: false } }),
+      paywall: checkbox({
+        defaultValue: false,
+      }),
     },
     ui: {
       listView: {
