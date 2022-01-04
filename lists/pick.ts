@@ -11,9 +11,19 @@ import {
 export const pick = list ({
     fields: {
       member: relationship({ ref: 'Member', many: false }),
+	  objective: select({
+		label: '類型',
+	 	datatype: 'enum',
+		options: [
+		  { label: '新聞', value: 'story' },
+		  {	label: '專題', value: 'collection' },
+		  {	label: '留言', value: 'comment' },
+		]
+	  }),
       story: relationship({ ref: 'Story', many: false }),
-	  comment: text({ validation: { isRequired: false } }),
-	  picked_date: timestamp({ validation: { isRequired: false} }),
+      collection: relationship({ ref: 'Collection', many: false }),
+      comment: relationship({ ref: 'Comment', many: false}),
+      pick_comment: relationship({ ref: 'Comment', many: true }),
 	  //posts: relationship({ ref: 'Post.author', many: true }),
 	  kind: select({
 		label: '型態',
@@ -35,6 +45,7 @@ export const pick = list ({
 		],
 		defaultValue: 'public',
 	  }),
+	  picked_date: timestamp({ validation: { isRequired: false} }),
       paywall: checkbox({
         defaultValue: false,
       }),

@@ -32,7 +32,9 @@ import {
 //import { document } from '@keystone-6/fields-document';
 import { category } from './lists/category';
 import { tag } from './lists/tag';
-import { topic } from './lists/topic';
+import { collection } from './lists/collection';
+import { collection_member } from './lists/collection_member';
+import { collection_picks } from './lists/collection_picks';
 import { story } from './lists/story';
 import { pick } from './lists/pick';
 import { publisher } from './lists/publisher';
@@ -52,11 +54,13 @@ export const lists: Lists = {
   // Here we define the user list.
   User: user,
   Category: category,
+  Collection: collection,
+  CollectionMember: collection_member,
+  PicksinCollection: collection_picks,
   Publisher: publisher,
   Story: story,
   Pick: pick,
   Member: member,
   Comment: comment,
-  Topic: topic,
   //Tag: tag,
 };

@@ -19,10 +19,67 @@ model User {
 }
 
 model Category {
-  id      Int    @id @default(autoincrement())
-  title   String @default("")
-  slug    String @default("")
-  summary String @default("")
+  id                  Int     @id @default(autoincrement())
+  title               String  @default("")
+  slug                String  @default("")
+  summary             String  @default("")
+  from_Story_category Story[] @relation("Story_category")
+}
+
+model Collection {
+  id                                Int                 @id @default(autoincrement())
+  title                             String              @default("")
+  slug                              String              @default("")
+  summary                           String              @default("")
+  public                            String?
+  format                            String?
+  comment                           Comment[]           @relation("Collection_comment")
+  creator                           Member?             @relation("Collection_creator", fields: [creatorId], references: [id])
+  creatorId                         Int?                @map("creator")
+  from_CollectionMember_collection  CollectionMember[]  @relation("CollectionMember_collection")
+  from_PicksinCollection_collection PicksinCollection[] @relation("PicksinCollection_collection")
+  from_Pick_collection              Pick[]              @relation("Pick_collection")
+  from_Member_following_collection  Member[]            @relation("Member_following_collection")
+
+  @@index([creatorId])
+}
+
+model CollectionMember {
+  id           Int         @id @default(autoincrement())
+  collection   Collection? @relation("CollectionMember_collection", fields: [collectionId], references: [id])
+  collectionId Int?        @map("collection")
+  member       Member?     @relation("CollectionMember_member", fields: [memberId], references: [id])
+  memberId     Int?        @map("member")
+  added_by     Member?     @relation("CollectionMember_added_by", fields: [added_byId], references: [id])
+  added_byId   Int?        @map("added_by")
+  updated_by   Member?     @relation("CollectionMember_updated_by", fields: [updated_byId], references: [id])
+  updated_byId Int?        @map("updated_by")
+  role         String?
+  added_date   DateTime?
+  updated_date DateTime?
+
+  @@index([collectionId])
+  @@index([memberId])
+  @@index([added_byId])
+  @@index([updated_byId])
+}
+
+model PicksinCollection {
+  id           Int         @id @default(autoincrement())
+  story        Pick?       @relation("PicksinCollection_story", fields: [storyId], references: [id])
+  storyId      Int?        @map("story")
+  collection   Collection? @relation("PicksinCollection_collection", fields: [collectionId], references: [id])
+  collectionId Int?        @map("collection")
+  summary      String      @default("")
+  creator      Member?     @relation("PicksinCollection_creator", fields: [creatorId], references: [id])
+  creatorId    Int?        @map("creator")
+  objective    String?
+  picked_date  DateTime?
+  updated_date DateTime?
+
+  @@index([storyId])
+  @@index([collectionId])
+  @@index([creatorId])
 }
 
 model Publisher {
@@ -48,77 +105,86 @@ model Story {
   sourceId           Int?       @map("source")
   author             Member?    @relation("Story_author", fields: [authorId], references: [id])
   authorId           Int?       @map("author")
+  category           Category?  @relation("Story_category", fields: [categoryId], references: [id])
+  categoryId         Int?       @map("category")
   published_date     DateTime?
   og_title           String     @default("")
   og_image           String     @default("")
   og_description     String     @default("")
+  paywall            Boolean    @default(false)
   from_Pick_story    Pick[]     @relation("Pick_story")
   from_Comment_story Comment[]  @relation("Comment_story")
 
   @@index([sourceId])
   @@index([authorId])
+  @@index([categoryId])
 }
 
 model Pick {
-  id          Int       @id @default(autoincrement())
-  member      Member?   @relation("Pick_member", fields: [memberId], references: [id])
-  memberId    Int?      @map("member")
-  story       Story?    @relation("Pick_story", fields: [storyId], references: [id])
-  storyId     Int?      @map("story")
-  comment     String    @default("")
-  picked_date DateTime?
-  kind        String?   @default("read")
-  state       String?   @default("public")
-  paywall     Boolean   @default(false)
+  id                           Int                 @id @default(autoincrement())
+  member                       Member?             @relation("Pick_member", fields: [memberId], references: [id])
+  memberId                     Int?                @map("member")
+  objective                    String?
+  story                        Story?              @relation("Pick_story", fields: [storyId], references: [id])
+  storyId                      Int?                @map("story")
+  collection                   Collection?         @relation("Pick_collection", fields: [collectionId], references: [id])
+  collectionId                 Int?                @map("collection")
+  comment                      Comment?            @relation("Pick_comment", fields: [commentId], references: [id])
+  commentId                    Int?                @map("comment")
+  pick_comment                 Comment[]           @relation("Pick_pick_comment")
+  kind                         String?             @default("read")
+  state                        String?             @default("public")
+  picked_date                  DateTime?
+  paywall                      Boolean             @default(false)
+  from_PicksinCollection_story PicksinCollection[] @relation("PicksinCollection_story")
 
   @@index([memberId])
   @@index([storyId])
+  @@index([collectionId])
+  @@index([commentId])
 }
 
 model Member {
-  id                    Int         @id @default(autoincrement())
-  firebaseId            String      @default("")
-  name                  String      @default("")
-  nickname              String      @default("")
-  email                 String      @default("")
-  following             Member[]    @relation("Member_following")
-  following_topic       Topic[]     @relation("Member_following_topic")
-  follow_publisher      Publisher[] @relation("Member_follow_publisher")
-  from_Story_author     Story[]     @relation("Story_author")
-  from_Pick_member      Pick[]      @relation("Pick_member")
-  from_Member_following Member[]    @relation("Member_following")
-  from_Topic_creator    Topic[]     @relation("Topic_creator")
+  id                               Int                 @id @default(autoincrement())
+  firebaseId                       String              @default("")
+  name                             String              @default("")
+  nickname                         String              @default("")
+  email                            String              @default("")
+  following                        Member[]            @relation("Member_following")
+  following_collection             Collection[]        @relation("Member_following_collection")
+  follow_publisher                 Publisher[]         @relation("Member_follow_publisher")
+  from_Collection_creator          Collection[]        @relation("Collection_creator")
+  from_CollectionMember_member     CollectionMember[]  @relation("CollectionMember_member")
+  from_CollectionMember_added_by   CollectionMember[]  @relation("CollectionMember_added_by")
+  from_CollectionMember_updated_by CollectionMember[]  @relation("CollectionMember_updated_by")
+  from_PicksinCollection_creator   PicksinCollection[] @relation("PicksinCollection_creator")
+  from_Story_author                Story[]             @relation("Story_author")
+  from_Pick_member                 Pick[]              @relation("Pick_member")
+  from_Member_following            Member[]            @relation("Member_following")
+  from_Comment_member              Comment[]           @relation("Comment_member")
 }
 
 model Comment {
-  id                  Int       @id @default(autoincrement())
-  story               Story?    @relation("Comment_story", fields: [storyId], references: [id])
-  storyId             Int?      @map("story")
-  content             String    @default("")
-  parent              Comment?  @relation("Comment_parent", fields: [parentId], references: [id])
-  parentId            Int?      @map("parent")
-  root                Comment?  @relation("Comment_root", fields: [rootId], references: [id])
-  rootId              Int?      @map("root")
-  state               String?   @default("public")
-  published_date      DateTime?
-  from_Comment_parent Comment[] @relation("Comment_parent")
-  from_Comment_root   Comment[] @relation("Comment_root")
+  id                      Int          @id @default(autoincrement())
+  member                  Member?      @relation("Comment_member", fields: [memberId], references: [id])
+  memberId                Int?         @map("member")
+  story                   Story?       @relation("Comment_story", fields: [storyId], references: [id])
+  storyId                 Int?         @map("story")
+  content                 String       @default("")
+  parent                  Comment?     @relation("Comment_parent", fields: [parentId], references: [id])
+  parentId                Int?         @map("parent")
+  root                    Comment?     @relation("Comment_root", fields: [rootId], references: [id])
+  rootId                  Int?         @map("root")
+  state                   String?      @default("public")
+  published_date          DateTime?
+  from_Collection_comment Collection[] @relation("Collection_comment")
+  from_Pick_comment       Pick[]       @relation("Pick_comment")
+  from_Pick_pick_comment  Pick[]       @relation("Pick_pick_comment")
+  from_Comment_parent     Comment[]    @relation("Comment_parent")
+  from_Comment_root       Comment[]    @relation("Comment_root")
 
+  @@index([memberId])
   @@index([storyId])
   @@index([parentId])
   @@index([rootId])
-}
-
-model Topic {
-  id                          Int      @id @default(autoincrement())
-  title                       String   @default("")
-  slug                        String   @default("")
-  summary                     String   @default("")
-  public                      String?
-  format                      String?
-  creator                     Member?  @relation("Topic_creator", fields: [creatorId], references: [id])
-  creatorId                   Int?     @map("creator")
-  from_Member_following_topic Member[] @relation("Member_following_topic")
-
-  @@index([creatorId])
 }

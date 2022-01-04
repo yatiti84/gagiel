@@ -8,7 +8,7 @@ import {
   select,
 } from '@keystone-6/core/fields';
 
-export const topic = list ({
+export const collection = list ({
     fields: {
       title: text({ validation: { isRequired: false } }),
       slug: text({ validation: { isUnique:true, isRequired: true } }),
@@ -30,6 +30,7 @@ export const topic = list ({
 		  {	label: '時間軸', value: 'timeline' },
 		]
 	  }),
+      comment: relationship({ ref: 'Comment', many: true }),
       creator: relationship({  
 	  	ref: 'Member',
 		many: false,
