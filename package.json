@@ -6,9 +6,9 @@
     "dev": "keystone dev",
     "start": "keystone start",
     "build": "keystone build",
-    "postinstall": "keystone postinstall"
+    "postinstall": "keystone postinstall",
     "db-migrate": "keystone-next prisma migrate deploy",
-    "lint": "eslint --ignore-path .eslintignore --ext .js,.ts .",
+    "lint": "eslint --ignore-path .eslintignore --ext .js,.ts ."
   },
   "dependencies": {
     "@keystone-6/auth": "^1.0.1",
