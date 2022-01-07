@@ -23,6 +23,9 @@ export const member = list ({
         validation: { isRequired: false },
         isFilterable: true,
       }),
+      is_active: checkbox({
+        defaultValue: true,
+      }),
 	  following: relationship({
 	    ref: 'Member',
 		many: true,
