@@ -150,6 +150,7 @@ model Member {
   name                             String              @default("")
   nickname                         String              @default("")
   email                            String              @default("")
+  is_active                        Boolean             @default(true)
   following                        Member[]            @relation("Member_following")
   following_collection             Collection[]        @relation("Member_following_collection")
   follow_publisher                 Publisher[]         @relation("Member_follow_publisher")

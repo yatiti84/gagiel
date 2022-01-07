@@ -718,6 +718,7 @@ type Member {
   name: String
   nickname: String
   email: String
+  is_active: Boolean
   following(
     where: MemberWhereInput! = {}
     orderBy: [MemberOrderByInput!]! = []
@@ -754,6 +755,7 @@ input MemberWhereInput {
   name: StringFilter
   nickname: StringFilter
   email: StringFilter
+  is_active: BooleanFilter
   following: MemberManyRelationFilter
   following_collection: CollectionManyRelationFilter
   follow_publisher: PublisherManyRelationFilter
@@ -783,6 +785,7 @@ input MemberOrderByInput {
   name: OrderDirection
   nickname: OrderDirection
   email: OrderDirection
+  is_active: OrderDirection
 }
 
 input MemberUpdateInput {
@@ -790,6 +793,7 @@ input MemberUpdateInput {
   name: String
   nickname: String
   email: String
+  is_active: Boolean
   following: MemberRelateToManyForUpdateInput
   following_collection: CollectionRelateToManyForUpdateInput
   follow_publisher: PublisherRelateToManyForUpdateInput
@@ -826,6 +830,7 @@ input MemberCreateInput {
   name: String
   nickname: String
   email: String
+  is_active: Boolean
   following: MemberRelateToManyForCreateInput
   following_collection: CollectionRelateToManyForCreateInput
   follow_publisher: PublisherRelateToManyForCreateInput

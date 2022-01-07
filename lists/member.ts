@@ -6,6 +6,7 @@ import {
   password,
   timestamp,
   select,
+  checkbox
 } from '@keystone-6/core/fields';
 
 export const member = list ({
