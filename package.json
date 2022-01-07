@@ -7,7 +7,7 @@
     "start": "keystone start",
     "build": "keystone build",
     "postinstall": "keystone postinstall",
-    "db-migrate": "keystone-next prisma migrate deploy",
+    "db-migrate": "keystone prisma migrate deploy",
     "lint": "eslint --ignore-path .eslintignore --ext .js,.ts ."
   },
   "dependencies": {
