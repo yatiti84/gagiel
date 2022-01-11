@@ -504,6 +504,13 @@ type Story {
   source: Publisher
   author: Member
   category: Category
+  pick(
+    where: PickWhereInput! = {}
+    orderBy: [PickOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Pick!]
+  pickCount(where: PickWhereInput! = {}): Int
   pick_count: Int
   comment_count: Int
   published_date: DateTime
@@ -529,6 +536,7 @@ input StoryWhereInput {
   source: PublisherWhereInput
   author: MemberWhereInput
   category: CategoryWhereInput
+  pick: PickManyRelationFilter
   pick_count: IntFilter
   comment_count: IntFilter
   published_date: DateTimeNullableFilter
@@ -536,6 +544,12 @@ input StoryWhereInput {
   og_image: StringFilter
   og_description: StringFilter
   paywall: BooleanFilter
+}
+
+input PickManyRelationFilter {
+  every: PickWhereInput
+  some: PickWhereInput
+  none: PickWhereInput
 }
 
 input IntFilter {
@@ -577,6 +591,7 @@ input StoryUpdateInput {
   source: PublisherRelateToOneForUpdateInput
   author: MemberRelateToOneForUpdateInput
   category: CategoryRelateToOneForUpdateInput
+  pick: PickRelateToManyForUpdateInput
   pick_count: Int
   comment_count: Int
   published_date: DateTime
@@ -598,6 +613,13 @@ input CategoryRelateToOneForUpdateInput {
   disconnect: Boolean
 }
 
+input PickRelateToManyForUpdateInput {
+  disconnect: [PickWhereUniqueInput!]
+  set: [PickWhereUniqueInput!]
+  create: [PickCreateInput!]
+  connect: [PickWhereUniqueInput!]
+}
+
 input StoryUpdateArgs {
   where: StoryWhereUniqueInput!
   data: StoryUpdateInput!
@@ -611,6 +633,7 @@ input StoryCreateInput {
   source: PublisherRelateToOneForCreateInput
   author: MemberRelateToOneForCreateInput
   category: CategoryRelateToOneForCreateInput
+  pick: PickRelateToManyForCreateInput
   pick_count: Int
   comment_count: Int
   published_date: DateTime
@@ -628,6 +651,11 @@ input PublisherRelateToOneForCreateInput {
 input CategoryRelateToOneForCreateInput {
   create: CategoryCreateInput
   connect: CategoryWhereUniqueInput
+}
+
+input PickRelateToManyForCreateInput {
+  create: [PickCreateInput!]
+  connect: [PickWhereUniqueInput!]
 }
 
 type Pick {
@@ -740,6 +768,13 @@ type Member {
   nickname: String
   email: String
   is_active: Boolean
+  follower(
+    where: MemberWhereInput! = {}
+    orderBy: [MemberOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Member!]
+  followerCount(where: MemberWhereInput! = {}): Int
   following(
     where: MemberWhereInput! = {}
     orderBy: [MemberOrderByInput!]! = []
@@ -777,6 +812,7 @@ input MemberWhereInput {
   nickname: StringFilter
   email: StringFilter
   is_active: BooleanFilter
+  follower: MemberManyRelationFilter
   following: MemberManyRelationFilter
   following_collection: CollectionManyRelationFilter
   follow_publisher: PublisherManyRelationFilter
@@ -815,6 +851,7 @@ input MemberUpdateInput {
   nickname: String
   email: String
   is_active: Boolean
+  follower: MemberRelateToManyForUpdateInput
   following: MemberRelateToManyForUpdateInput
   following_collection: CollectionRelateToManyForUpdateInput
   follow_publisher: PublisherRelateToManyForUpdateInput
@@ -852,6 +889,7 @@ input MemberCreateInput {
   nickname: String
   email: String
   is_active: Boolean
+  follower: MemberRelateToManyForCreateInput
   following: MemberRelateToManyForCreateInput
   following_collection: CollectionRelateToManyForCreateInput
   follow_publisher: PublisherRelateToManyForCreateInput

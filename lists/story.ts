@@ -19,6 +19,7 @@ export const story = list ({
 	  source: relationship({ ref: 'Publisher', many: false }),
 	  author: relationship({ ref: 'Member', many: false }),
 	  category: relationship({ ref: 'Category', many: false }),
+	  pick: relationship({ ref: 'Pick', many: true }),
       pick_count: integer({ validation: { isRequired: true, defaultValue: 0} }),
       comment_count: integer({ validation: { isRequired: true, defaultValue: 0} }),
       published_date: timestamp({ validation: { isRequired: false } }),

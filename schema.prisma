@@ -107,6 +107,7 @@ model Story {
   authorId           Int?       @map("author")
   category           Category?  @relation("Story_category", fields: [categoryId], references: [id])
   categoryId         Int?       @map("category")
+  pick               Pick[]     @relation("Story_pick")
   pick_count         Int
   comment_count      Int
   published_date     DateTime?
@@ -139,6 +140,7 @@ model Pick {
   picked_date                  DateTime?
   paywall                      Boolean             @default(false)
   from_PicksinCollection_story PicksinCollection[] @relation("PicksinCollection_story")
+  from_Story_pick              Story[]             @relation("Story_pick")
 
   @@index([memberId])
   @@index([storyId])
@@ -153,6 +155,7 @@ model Member {
   nickname                         String              @default("")
   email                            String              @default("")
   is_active                        Boolean             @default(true)
+  follower                         Member[]            @relation("Member_follower")
   following                        Member[]            @relation("Member_following")
   following_collection             Collection[]        @relation("Member_following_collection")
   follow_publisher                 Publisher[]         @relation("Member_follow_publisher")
@@ -163,6 +166,7 @@ model Member {
   from_PicksinCollection_creator   PicksinCollection[] @relation("PicksinCollection_creator")
   from_Story_author                Story[]             @relation("Story_author")
   from_Pick_member                 Pick[]              @relation("Pick_member")
+  from_Member_follower             Member[]            @relation("Member_follower")
   from_Member_following            Member[]            @relation("Member_following")
   from_Comment_member              Comment[]           @relation("Comment_member")
 }
