@@ -768,6 +768,20 @@ type Member {
   nickname: String
   email: String
   is_active: Boolean
+  pick(
+    where: PickWhereInput! = {}
+    orderBy: [PickOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Pick!]
+  pickCount(where: PickWhereInput! = {}): Int
+  comment(
+    where: CommentWhereInput! = {}
+    orderBy: [CommentOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Comment!]
+  commentCount(where: CommentWhereInput! = {}): Int
   follower(
     where: MemberWhereInput! = {}
     orderBy: [MemberOrderByInput!]! = []
@@ -819,6 +833,8 @@ input MemberWhereInput {
   nickname: StringFilter
   email: StringFilter
   is_active: BooleanFilter
+  pick: PickManyRelationFilter
+  comment: CommentManyRelationFilter
   follower: MemberManyRelationFilter
   following: MemberManyRelationFilter
   following_category: CategoryManyRelationFilter
@@ -865,6 +881,8 @@ input MemberUpdateInput {
   nickname: String
   email: String
   is_active: Boolean
+  pick: PickRelateToManyForUpdateInput
+  comment: CommentRelateToManyForUpdateInput
   follower: MemberRelateToManyForUpdateInput
   following: MemberRelateToManyForUpdateInput
   following_category: CategoryRelateToManyForUpdateInput
@@ -911,6 +929,8 @@ input MemberCreateInput {
   nickname: String
   email: String
   is_active: Boolean
+  pick: PickRelateToManyForCreateInput
+  comment: CommentRelateToManyForCreateInput
   follower: MemberRelateToManyForCreateInput
   following: MemberRelateToManyForCreateInput
   following_category: CategoryRelateToManyForCreateInput

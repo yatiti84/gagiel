@@ -27,6 +27,14 @@ export const member = list ({
       is_active: checkbox({
         defaultValue: true,
       }),
+	  pick: relationship({
+	    ref: 'Pick',
+		many: true,
+	  }),
+	  comment: relationship({
+	    ref: 'Comment',
+		many: true,
+	  }),
 	  follower: relationship({
 	    ref: 'Member',
 		many: true,
