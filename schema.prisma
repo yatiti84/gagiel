@@ -107,6 +107,8 @@ model Story {
   authorId           Int?       @map("author")
   category           Category?  @relation("Story_category", fields: [categoryId], references: [id])
   categoryId         Int?       @map("category")
+  pick_count         Int
+  comment_count      Int
   published_date     DateTime?
   og_title           String     @default("")
   og_image           String     @default("")

@@ -504,6 +504,8 @@ type Story {
   source: Publisher
   author: Member
   category: Category
+  pick_count: Int
+  comment_count: Int
   published_date: DateTime
   og_title: String
   og_image: String
@@ -527,11 +529,24 @@ input StoryWhereInput {
   source: PublisherWhereInput
   author: MemberWhereInput
   category: CategoryWhereInput
+  pick_count: IntFilter
+  comment_count: IntFilter
   published_date: DateTimeNullableFilter
   og_title: StringFilter
   og_image: StringFilter
   og_description: StringFilter
   paywall: BooleanFilter
+}
+
+input IntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: IntFilter
 }
 
 input BooleanFilter {
@@ -545,6 +560,8 @@ input StoryOrderByInput {
   url: OrderDirection
   summary: OrderDirection
   content: OrderDirection
+  pick_count: OrderDirection
+  comment_count: OrderDirection
   published_date: OrderDirection
   og_title: OrderDirection
   og_image: OrderDirection
@@ -560,6 +577,8 @@ input StoryUpdateInput {
   source: PublisherRelateToOneForUpdateInput
   author: MemberRelateToOneForUpdateInput
   category: CategoryRelateToOneForUpdateInput
+  pick_count: Int
+  comment_count: Int
   published_date: DateTime
   og_title: String
   og_image: String
@@ -592,6 +611,8 @@ input StoryCreateInput {
   source: PublisherRelateToOneForCreateInput
   author: MemberRelateToOneForCreateInput
   category: CategoryRelateToOneForCreateInput
+  pick_count: Int
+  comment_count: Int
   published_date: DateTime
   og_title: String
   og_image: String
