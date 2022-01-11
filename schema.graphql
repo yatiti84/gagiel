@@ -782,6 +782,13 @@ type Member {
     skip: Int! = 0
   ): [Member!]
   followingCount(where: MemberWhereInput! = {}): Int
+  following_category(
+    where: CategoryWhereInput! = {}
+    orderBy: [CategoryOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Category!]
+  following_categoryCount(where: CategoryWhereInput! = {}): Int
   following_collection(
     where: CollectionWhereInput! = {}
     orderBy: [CollectionOrderByInput!]! = []
@@ -814,6 +821,7 @@ input MemberWhereInput {
   is_active: BooleanFilter
   follower: MemberManyRelationFilter
   following: MemberManyRelationFilter
+  following_category: CategoryManyRelationFilter
   following_collection: CollectionManyRelationFilter
   follow_publisher: PublisherManyRelationFilter
 }
@@ -822,6 +830,12 @@ input MemberManyRelationFilter {
   every: MemberWhereInput
   some: MemberWhereInput
   none: MemberWhereInput
+}
+
+input CategoryManyRelationFilter {
+  every: CategoryWhereInput
+  some: CategoryWhereInput
+  none: CategoryWhereInput
 }
 
 input CollectionManyRelationFilter {
@@ -853,6 +867,7 @@ input MemberUpdateInput {
   is_active: Boolean
   follower: MemberRelateToManyForUpdateInput
   following: MemberRelateToManyForUpdateInput
+  following_category: CategoryRelateToManyForUpdateInput
   following_collection: CollectionRelateToManyForUpdateInput
   follow_publisher: PublisherRelateToManyForUpdateInput
 }
@@ -862,6 +877,13 @@ input MemberRelateToManyForUpdateInput {
   set: [MemberWhereUniqueInput!]
   create: [MemberCreateInput!]
   connect: [MemberWhereUniqueInput!]
+}
+
+input CategoryRelateToManyForUpdateInput {
+  disconnect: [CategoryWhereUniqueInput!]
+  set: [CategoryWhereUniqueInput!]
+  create: [CategoryCreateInput!]
+  connect: [CategoryWhereUniqueInput!]
 }
 
 input CollectionRelateToManyForUpdateInput {
@@ -891,6 +913,7 @@ input MemberCreateInput {
   is_active: Boolean
   follower: MemberRelateToManyForCreateInput
   following: MemberRelateToManyForCreateInput
+  following_category: CategoryRelateToManyForCreateInput
   following_collection: CollectionRelateToManyForCreateInput
   follow_publisher: PublisherRelateToManyForCreateInput
 }
@@ -898,6 +921,11 @@ input MemberCreateInput {
 input MemberRelateToManyForCreateInput {
   create: [MemberCreateInput!]
   connect: [MemberWhereUniqueInput!]
+}
+
+input CategoryRelateToManyForCreateInput {
+  create: [CategoryCreateInput!]
+  connect: [CategoryWhereUniqueInput!]
 }
 
 input CollectionRelateToManyForCreateInput {

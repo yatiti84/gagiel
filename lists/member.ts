@@ -35,6 +35,10 @@ export const member = list ({
 	    ref: 'Member',
 		many: true,
 	  }),
+	  following_category: relationship({
+	    ref: 'Category',
+		many: true,
+	  }),
 	  following_collection: relationship({
 	    ref: 'Collection',
 		many: true,

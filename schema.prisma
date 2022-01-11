@@ -19,11 +19,12 @@ model User {
 }
 
 model Category {
-  id                  Int     @id @default(autoincrement())
-  title               String  @default("")
-  slug                String  @default("")
-  summary             String  @default("")
-  from_Story_category Story[] @relation("Story_category")
+  id                             Int      @id @default(autoincrement())
+  title                          String   @default("")
+  slug                           String   @default("")
+  summary                        String   @default("")
+  from_Story_category            Story[]  @relation("Story_category")
+  from_Member_following_category Member[] @relation("Member_following_category")
 }
 
 model Collection {
@@ -157,6 +158,7 @@ model Member {
   is_active                        Boolean             @default(true)
   follower                         Member[]            @relation("Member_follower")
   following                        Member[]            @relation("Member_following")
+  following_category               Category[]          @relation("Member_following_category")
   following_collection             Collection[]        @relation("Member_following_collection")
   follow_publisher                 Publisher[]         @relation("Member_follow_publisher")
   from_Collection_creator          Collection[]        @relation("Collection_creator")
