@@ -11,7 +11,7 @@ import {
 export const comment = list ({
     fields: {
 	  member: relationship({ ref: 'Member', many: false }),
-	  story: relationship({ ref: 'Story', many: false }),
+	  story: relationship({ ref: 'Story.comment', many: false }),
       content: text({ validation: { isRequired: false } }),
 	  parent: relationship({ ref: 'Comment', many: false }),
 	  root: relationship({ ref: 'Comment', many: false }),

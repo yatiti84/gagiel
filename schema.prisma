@@ -97,26 +97,24 @@ model Publisher {
 }
 
 model Story {
-  id                 Int        @id @default(autoincrement())
-  title              String     @default("")
-  url                String     @default("")
-  summary            String     @default("")
-  content            String     @default("")
-  source             Publisher? @relation("Story_source", fields: [sourceId], references: [id])
-  sourceId           Int?       @map("source")
-  author             Member?    @relation("Story_author", fields: [authorId], references: [id])
-  authorId           Int?       @map("author")
-  category           Category?  @relation("Story_category", fields: [categoryId], references: [id])
-  categoryId         Int?       @map("category")
-  pick               Pick[]     @relation("Story_pick")
-  comment            Comment[]  @relation("Story_comment")
-  published_date     DateTime?
-  og_title           String     @default("")
-  og_image           String     @default("")
-  og_description     String     @default("")
-  paywall            Boolean    @default(false)
-  from_Pick_story    Pick[]     @relation("Pick_story")
-  from_Comment_story Comment[]  @relation("Comment_story")
+  id             Int        @id @default(autoincrement())
+  title          String     @default("")
+  url            String     @default("")
+  summary        String     @default("")
+  content        String     @default("")
+  source         Publisher? @relation("Story_source", fields: [sourceId], references: [id])
+  sourceId       Int?       @map("source")
+  author         Member?    @relation("Story_author", fields: [authorId], references: [id])
+  authorId       Int?       @map("author")
+  category       Category?  @relation("Story_category", fields: [categoryId], references: [id])
+  categoryId     Int?       @map("category")
+  pick           Pick[]     @relation("Pick_story")
+  comment        Comment[]  @relation("Comment_story")
+  published_date DateTime?
+  og_title       String     @default("")
+  og_image       String     @default("")
+  og_description String     @default("")
+  paywall        Boolean    @default(false)
 
   @@index([sourceId])
   @@index([authorId])
@@ -140,7 +138,6 @@ model Pick {
   picked_date                  DateTime?
   paywall                      Boolean             @default(false)
   from_PicksinCollection_story PicksinCollection[] @relation("PicksinCollection_story")
-  from_Story_pick              Story[]             @relation("Story_pick")
   from_Member_pick             Member[]            @relation("Member_pick")
 
   @@index([memberId])
@@ -187,7 +184,6 @@ model Comment {
   state                   String?      @default("public")
   published_date          DateTime?
   from_Collection_comment Collection[] @relation("Collection_comment")
-  from_Story_comment      Story[]      @relation("Story_comment")
   from_Pick_comment       Pick[]       @relation("Pick_comment")
   from_Pick_pick_comment  Pick[]       @relation("Pick_pick_comment")
   from_Member_comment     Member[]     @relation("Member_comment")

@@ -20,7 +20,7 @@ export const pick = list ({
 		  {	label: '留言', value: 'comment' },
 		]
 	  }),
-      story: relationship({ ref: 'Story', many: false }),
+      story: relationship({ ref: 'Story.pick', many: false }),
       collection: relationship({ ref: 'Collection', many: false }),
       comment: relationship({ ref: 'Comment', many: false}),
       pick_comment: relationship({ ref: 'Comment', many: true }),
