@@ -36,11 +36,11 @@ export const member = list ({
 		many: true,
 	  }),
 	  follower: relationship({
-	    ref: 'Member',
+	    ref: 'Member.following',
 		many: true,
 	  }),
 	  following: relationship({
-	    ref: 'Member',
+	    ref: 'Member.follower',
 		many: true,
 	  }),
 	  following_category: relationship({

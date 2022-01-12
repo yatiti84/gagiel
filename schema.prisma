@@ -109,6 +109,7 @@ model Story {
   category           Category?  @relation("Story_category", fields: [categoryId], references: [id])
   categoryId         Int?       @map("category")
   pick               Pick[]     @relation("Story_pick")
+  comment            Comment[]  @relation("Story_comment")
   pick_count         Int
   comment_count      Int
   published_date     DateTime?
@@ -160,7 +161,7 @@ model Member {
   pick                             Pick[]              @relation("Member_pick")
   comment                          Comment[]           @relation("Member_comment")
   follower                         Member[]            @relation("Member_follower")
-  following                        Member[]            @relation("Member_following")
+  following                        Member[]            @relation("Member_follower")
   following_category               Category[]          @relation("Member_following_category")
   following_collection             Collection[]        @relation("Member_following_collection")
   follow_publisher                 Publisher[]         @relation("Member_follow_publisher")
@@ -171,8 +172,6 @@ model Member {
   from_PicksinCollection_creator   PicksinCollection[] @relation("PicksinCollection_creator")
   from_Story_author                Story[]             @relation("Story_author")
   from_Pick_member                 Pick[]              @relation("Pick_member")
-  from_Member_follower             Member[]            @relation("Member_follower")
-  from_Member_following            Member[]            @relation("Member_following")
   from_Comment_member              Comment[]           @relation("Comment_member")
 }
 
@@ -190,6 +189,7 @@ model Comment {
   state                   String?      @default("public")
   published_date          DateTime?
   from_Collection_comment Collection[] @relation("Collection_comment")
+  from_Story_comment      Story[]      @relation("Story_comment")
   from_Pick_comment       Pick[]       @relation("Pick_comment")
   from_Pick_pick_comment  Pick[]       @relation("Pick_pick_comment")
   from_Member_comment     Member[]     @relation("Member_comment")
