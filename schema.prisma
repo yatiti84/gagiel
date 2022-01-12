@@ -110,8 +110,6 @@ model Story {
   categoryId         Int?       @map("category")
   pick               Pick[]     @relation("Story_pick")
   comment            Comment[]  @relation("Story_comment")
-  pick_count         Int
-  comment_count      Int
   published_date     DateTime?
   og_title           String     @default("")
   og_image           String     @default("")

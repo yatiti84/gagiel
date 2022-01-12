@@ -518,8 +518,6 @@ type Story {
     skip: Int! = 0
   ): [Comment!]
   commentCount(where: CommentWhereInput! = {}): Int
-  pick_count: Int
-  comment_count: Int
   published_date: DateTime
   og_title: String
   og_image: String
@@ -545,8 +543,6 @@ input StoryWhereInput {
   category: CategoryWhereInput
   pick: PickManyRelationFilter
   comment: CommentManyRelationFilter
-  pick_count: IntFilter
-  comment_count: IntFilter
   published_date: DateTimeNullableFilter
   og_title: StringFilter
   og_image: StringFilter
@@ -560,17 +556,6 @@ input PickManyRelationFilter {
   none: PickWhereInput
 }
 
-input IntFilter {
-  equals: Int
-  in: [Int!]
-  notIn: [Int!]
-  lt: Int
-  lte: Int
-  gt: Int
-  gte: Int
-  not: IntFilter
-}
-
 input BooleanFilter {
   equals: Boolean
   not: BooleanFilter
@@ -582,8 +567,6 @@ input StoryOrderByInput {
   url: OrderDirection
   summary: OrderDirection
   content: OrderDirection
-  pick_count: OrderDirection
-  comment_count: OrderDirection
   published_date: OrderDirection
   og_title: OrderDirection
   og_image: OrderDirection
@@ -601,8 +584,6 @@ input StoryUpdateInput {
   category: CategoryRelateToOneForUpdateInput
   pick: PickRelateToManyForUpdateInput
   comment: CommentRelateToManyForUpdateInput
-  pick_count: Int
-  comment_count: Int
   published_date: DateTime
   og_title: String
   og_image: String
@@ -644,8 +625,6 @@ input StoryCreateInput {
   category: CategoryRelateToOneForCreateInput
   pick: PickRelateToManyForCreateInput
   comment: CommentRelateToManyForCreateInput
-  pick_count: Int
-  comment_count: Int
   published_date: DateTime
   og_title: String
   og_image: String
