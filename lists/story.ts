@@ -25,6 +25,9 @@ export const story = list ({
       og_title: text({ validation: { isRequired: false } }),
       og_image: text({ validation: { isRequired: false } }),
       og_description: text({ validation: { isRequired: false } }),
+	  full_content: checkbox({
+		defaultValue: false,
+	  }),
       paywall: checkbox({
         defaultValue: false,
       }),

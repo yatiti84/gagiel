@@ -6,6 +6,7 @@ import {
   password,
   timestamp,
   select,
+  checkbox,
 } from '@keystone-6/core/fields';
 
 export const publisher = list ({
@@ -24,7 +25,10 @@ export const publisher = list ({
 			{ label: '英文', value: 'en-US' },
 		    { label: '日文', value: 'ja-Jp' }
 		],
-		defaultValue: 'read',
+		defaultValue: 'zh-TW',
+	  }),
+	  full_content: checkbox({
+		defaultValue: false,
 	  }),
       //posts: relationship({ ref: 'Post.author', many: true }),
     },
