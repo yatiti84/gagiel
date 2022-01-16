@@ -91,7 +91,9 @@ model Publisher {
   summary                      String   @default("")
   logo                         String   @default("")
   description                  String   @default("")
-  lang                         String?  @default("read")
+  lang                         String?  @default("zh-TW")
+  full_content                 Boolean  @default(false)
+  cover                        String?  @default("none")
   from_Story_source            Story[]  @relation("Story_source")
   from_Member_follow_publisher Member[] @relation("Member_follow_publisher")
 }
@@ -114,7 +116,9 @@ model Story {
   og_title       String     @default("")
   og_image       String     @default("")
   og_description String     @default("")
+  full_content   Boolean    @default(false)
   paywall        Boolean    @default(false)
+  cover          String?    @default("none")
 
   @@index([sourceId])
   @@index([authorId])

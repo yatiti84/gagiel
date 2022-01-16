@@ -439,6 +439,8 @@ type Publisher {
   logo: String
   description: String
   lang: String
+  full_content: Boolean
+  cover: String
 }
 
 input PublisherWhereUniqueInput {
@@ -457,6 +459,13 @@ input PublisherWhereInput {
   logo: StringFilter
   description: StringFilter
   lang: StringNullableFilter
+  full_content: BooleanFilter
+  cover: StringNullableFilter
+}
+
+input BooleanFilter {
+  equals: Boolean
+  not: BooleanFilter
 }
 
 input PublisherOrderByInput {
@@ -468,6 +477,8 @@ input PublisherOrderByInput {
   logo: OrderDirection
   description: OrderDirection
   lang: OrderDirection
+  full_content: OrderDirection
+  cover: OrderDirection
 }
 
 input PublisherUpdateInput {
@@ -478,6 +489,8 @@ input PublisherUpdateInput {
   logo: String
   description: String
   lang: String
+  full_content: Boolean
+  cover: String
 }
 
 input PublisherUpdateArgs {
@@ -493,6 +506,8 @@ input PublisherCreateInput {
   logo: String
   description: String
   lang: String
+  full_content: Boolean
+  cover: String
 }
 
 type Story {
@@ -522,7 +537,9 @@ type Story {
   og_title: String
   og_image: String
   og_description: String
+  full_content: Boolean
   paywall: Boolean
+  cover: String
 }
 
 input StoryWhereUniqueInput {
@@ -547,18 +564,15 @@ input StoryWhereInput {
   og_title: StringFilter
   og_image: StringFilter
   og_description: StringFilter
+  full_content: BooleanFilter
   paywall: BooleanFilter
+  cover: StringNullableFilter
 }
 
 input PickManyRelationFilter {
   every: PickWhereInput
   some: PickWhereInput
   none: PickWhereInput
-}
-
-input BooleanFilter {
-  equals: Boolean
-  not: BooleanFilter
 }
 
 input StoryOrderByInput {
@@ -571,7 +585,9 @@ input StoryOrderByInput {
   og_title: OrderDirection
   og_image: OrderDirection
   og_description: OrderDirection
+  full_content: OrderDirection
   paywall: OrderDirection
+  cover: OrderDirection
 }
 
 input StoryUpdateInput {
@@ -588,7 +604,9 @@ input StoryUpdateInput {
   og_title: String
   og_image: String
   og_description: String
+  full_content: Boolean
   paywall: Boolean
+  cover: String
 }
 
 input PublisherRelateToOneForUpdateInput {
@@ -629,7 +647,9 @@ input StoryCreateInput {
   og_title: String
   og_image: String
   og_description: String
+  full_content: Boolean
   paywall: Boolean
+  cover: String
 }
 
 input PublisherRelateToOneForCreateInput {
