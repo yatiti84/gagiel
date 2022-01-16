@@ -30,6 +30,17 @@ export const publisher = list ({
 	  full_content: checkbox({
 		defaultValue: false,
 	  }),
+	  cover: select({
+		label: '蓋板',
+		datatype: 'enum',
+		options: [ 
+			{ label: '手機', value: 'mobile' }, 
+			{ label: '桌機', value: 'desktop' },
+			{ label: '所有尺寸', value: 'all' },
+		    { label: '無', value: 'none' }
+		],
+		defaultValue: 'none',
+	  }),
       //posts: relationship({ ref: 'Post.author', many: true }),
     },
     ui: {
