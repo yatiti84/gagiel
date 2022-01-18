@@ -540,6 +540,7 @@ type Story {
   full_content: Boolean
   paywall: Boolean
   cover: String
+  is_active: Boolean
 }
 
 input StoryWhereUniqueInput {
@@ -567,6 +568,7 @@ input StoryWhereInput {
   full_content: BooleanFilter
   paywall: BooleanFilter
   cover: StringNullableFilter
+  is_active: BooleanFilter
 }
 
 input PickManyRelationFilter {
@@ -588,6 +590,7 @@ input StoryOrderByInput {
   full_content: OrderDirection
   paywall: OrderDirection
   cover: OrderDirection
+  is_active: OrderDirection
 }
 
 input StoryUpdateInput {
@@ -607,6 +610,7 @@ input StoryUpdateInput {
   full_content: Boolean
   paywall: Boolean
   cover: String
+  is_active: Boolean
 }
 
 input PublisherRelateToOneForUpdateInput {
@@ -650,6 +654,7 @@ input StoryCreateInput {
   full_content: Boolean
   paywall: Boolean
   cover: String
+  is_active: Boolean
 }
 
 input PublisherRelateToOneForCreateInput {
@@ -685,6 +690,7 @@ type Pick {
   state: String
   picked_date: DateTime
   paywall: Boolean
+  is_active: Boolean
 }
 
 input PickWhereUniqueInput {
@@ -706,6 +712,7 @@ input PickWhereInput {
   state: StringNullableFilter
   picked_date: DateTimeNullableFilter
   paywall: BooleanFilter
+  is_active: BooleanFilter
 }
 
 input PickOrderByInput {
@@ -715,6 +722,7 @@ input PickOrderByInput {
   state: OrderDirection
   picked_date: OrderDirection
   paywall: OrderDirection
+  is_active: OrderDirection
 }
 
 input PickUpdateInput {
@@ -728,6 +736,7 @@ input PickUpdateInput {
   state: String
   picked_date: DateTime
   paywall: Boolean
+  is_active: Boolean
 }
 
 input StoryRelateToOneForUpdateInput {
@@ -758,6 +767,7 @@ input PickCreateInput {
   state: String
   picked_date: DateTime
   paywall: Boolean
+  is_active: Boolean
 }
 
 input StoryRelateToOneForCreateInput {
@@ -775,8 +785,10 @@ type Member {
   firebaseId: String
   name: String
   nickname: String
+  avatar: String
   email: String
   is_active: Boolean
+  verified: Boolean
   pick(
     where: PickWhereInput! = {}
     orderBy: [PickOrderByInput!]! = []
@@ -840,8 +852,10 @@ input MemberWhereInput {
   firebaseId: StringFilter
   name: StringFilter
   nickname: StringFilter
+  avatar: StringFilter
   email: StringFilter
   is_active: BooleanFilter
+  verified: BooleanFilter
   pick: PickManyRelationFilter
   comment: CommentManyRelationFilter
   follower: MemberManyRelationFilter
@@ -880,16 +894,20 @@ input MemberOrderByInput {
   firebaseId: OrderDirection
   name: OrderDirection
   nickname: OrderDirection
+  avatar: OrderDirection
   email: OrderDirection
   is_active: OrderDirection
+  verified: OrderDirection
 }
 
 input MemberUpdateInput {
   firebaseId: String
   name: String
   nickname: String
+  avatar: String
   email: String
   is_active: Boolean
+  verified: Boolean
   pick: PickRelateToManyForUpdateInput
   comment: CommentRelateToManyForUpdateInput
   follower: MemberRelateToManyForUpdateInput
@@ -936,8 +954,10 @@ input MemberCreateInput {
   firebaseId: String
   name: String
   nickname: String
+  avatar: String
   email: String
   is_active: Boolean
+  verified: Boolean
   pick: PickRelateToManyForCreateInput
   comment: CommentRelateToManyForCreateInput
   follower: MemberRelateToManyForCreateInput
@@ -976,6 +996,7 @@ type Comment {
   root: Comment
   state: String
   published_date: DateTime
+  is_active: Boolean
 }
 
 input CommentWhereUniqueInput {
@@ -994,6 +1015,7 @@ input CommentWhereInput {
   root: CommentWhereInput
   state: StringNullableFilter
   published_date: DateTimeNullableFilter
+  is_active: BooleanFilter
 }
 
 input CommentOrderByInput {
@@ -1001,6 +1023,7 @@ input CommentOrderByInput {
   content: OrderDirection
   state: OrderDirection
   published_date: OrderDirection
+  is_active: OrderDirection
 }
 
 input CommentUpdateInput {
@@ -1011,6 +1034,7 @@ input CommentUpdateInput {
   root: CommentRelateToOneForUpdateInput
   state: String
   published_date: DateTime
+  is_active: Boolean
 }
 
 input CommentUpdateArgs {
@@ -1026,6 +1050,7 @@ input CommentCreateInput {
   root: CommentRelateToOneForCreateInput
   state: String
   published_date: DateTime
+  is_active: Boolean
 }
 
 """

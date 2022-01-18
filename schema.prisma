@@ -119,6 +119,7 @@ model Story {
   full_content   Boolean    @default(false)
   paywall        Boolean    @default(false)
   cover          String?    @default("none")
+  is_active      Boolean    @default(true)
 
   @@index([sourceId])
   @@index([authorId])
@@ -141,6 +142,7 @@ model Pick {
   state                        String?             @default("public")
   picked_date                  DateTime?
   paywall                      Boolean             @default(false)
+  is_active                    Boolean             @default(true)
   from_PicksinCollection_story PicksinCollection[] @relation("PicksinCollection_story")
   from_Member_pick             Member[]            @relation("Member_pick")
 
@@ -155,8 +157,10 @@ model Member {
   firebaseId                       String              @default("")
   name                             String              @default("")
   nickname                         String              @default("")
+  avatar                           String              @default("")
   email                            String              @default("")
   is_active                        Boolean             @default(true)
+  verified                         Boolean             @default(false)
   pick                             Pick[]              @relation("Member_pick")
   comment                          Comment[]           @relation("Member_comment")
   follower                         Member[]            @relation("Member_follower")
@@ -187,6 +191,7 @@ model Comment {
   rootId                  Int?         @map("root")
   state                   String?      @default("public")
   published_date          DateTime?
+  is_active               Boolean      @default(true)
   from_Collection_comment Collection[] @relation("Collection_comment")
   from_Pick_comment       Pick[]       @relation("Pick_comment")
   from_Pick_pick_comment  Pick[]       @relation("Pick_pick_comment")
