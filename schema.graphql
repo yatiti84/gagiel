@@ -440,7 +440,7 @@ type Publisher {
   description: String
   lang: String
   full_content: Boolean
-  cover: String
+  full_screen_ad: String
 }
 
 input PublisherWhereUniqueInput {
@@ -460,7 +460,7 @@ input PublisherWhereInput {
   description: StringFilter
   lang: StringNullableFilter
   full_content: BooleanFilter
-  cover: StringNullableFilter
+  full_screen_ad: StringNullableFilter
 }
 
 input BooleanFilter {
@@ -478,7 +478,7 @@ input PublisherOrderByInput {
   description: OrderDirection
   lang: OrderDirection
   full_content: OrderDirection
-  cover: OrderDirection
+  full_screen_ad: OrderDirection
 }
 
 input PublisherUpdateInput {
@@ -490,7 +490,7 @@ input PublisherUpdateInput {
   description: String
   lang: String
   full_content: Boolean
-  cover: String
+  full_screen_ad: String
 }
 
 input PublisherUpdateArgs {
@@ -507,7 +507,7 @@ input PublisherCreateInput {
   description: String
   lang: String
   full_content: Boolean
-  cover: String
+  full_screen_ad: String
 }
 
 type Story {
@@ -539,7 +539,7 @@ type Story {
   og_description: String
   full_content: Boolean
   paywall: Boolean
-  cover: String
+  full_screen_ad: String
   is_active: Boolean
 }
 
@@ -567,7 +567,7 @@ input StoryWhereInput {
   og_description: StringFilter
   full_content: BooleanFilter
   paywall: BooleanFilter
-  cover: StringNullableFilter
+  full_screen_ad: StringNullableFilter
   is_active: BooleanFilter
 }
 
@@ -589,7 +589,7 @@ input StoryOrderByInput {
   og_description: OrderDirection
   full_content: OrderDirection
   paywall: OrderDirection
-  cover: OrderDirection
+  full_screen_ad: OrderDirection
   is_active: OrderDirection
 }
 
@@ -609,7 +609,7 @@ input StoryUpdateInput {
   og_description: String
   full_content: Boolean
   paywall: Boolean
-  cover: String
+  full_screen_ad: String
   is_active: Boolean
 }
 
@@ -653,7 +653,7 @@ input StoryCreateInput {
   og_description: String
   full_content: Boolean
   paywall: Boolean
-  cover: String
+  full_screen_ad: String
   is_active: Boolean
 }
 

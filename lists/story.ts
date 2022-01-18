@@ -31,7 +31,7 @@ export const story = list ({
       paywall: checkbox({
         defaultValue: false,
       }),
-	  cover: select({
+	  full_screen_ad: select({
 		label: '蓋板',
 		datatype: 'enum',
 		options: [ 

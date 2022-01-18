@@ -93,7 +93,7 @@ model Publisher {
   description                  String   @default("")
   lang                         String?  @default("zh-TW")
   full_content                 Boolean  @default(false)
-  cover                        String?  @default("none")
+  full_screen_ad               String?  @default("none")
   from_Story_source            Story[]  @relation("Story_source")
   from_Member_follow_publisher Member[] @relation("Member_follow_publisher")
 }
@@ -118,7 +118,7 @@ model Story {
   og_description String     @default("")
   full_content   Boolean    @default(false)
   paywall        Boolean    @default(false)
-  cover          String?    @default("none")
+  full_screen_ad String?    @default("none")
   is_active      Boolean    @default(true)
 
   @@index([sourceId])
