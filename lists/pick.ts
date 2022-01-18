@@ -49,6 +49,9 @@ export const pick = list ({
       paywall: checkbox({
         defaultValue: false,
       }),
+      is_active: checkbox({
+        defaultValue: true,
+      }),
       //tag: relationship({ ref: 'Tag', many: false }),
     },
     ui: {

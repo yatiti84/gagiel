@@ -20,12 +20,16 @@ export const member = list ({
       }),
       name: text({ validation: { isRequired: true, isUnique: true } }),
       nickname: text({ validation: { isRequired: true } }),
+      avatar: text({ validation: { isRequired: false } }),
       email: text({
         validation: { isRequired: false },
         isFilterable: true,
       }),
       is_active: checkbox({
         defaultValue: true,
+      }),
+      verified: checkbox({
+        defaultValue: false,
       }),
 	  pick: relationship({
 	    ref: 'Pick',

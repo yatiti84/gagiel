@@ -5,6 +5,7 @@ import {
   relationship,
   password,
   timestamp,
+  checkbox,
   select,
 } from '@keystone-6/core/fields';
 
@@ -26,6 +27,9 @@ export const comment = list ({
 		defaultValue: 'public',
 	  }),
       published_date: timestamp({ validation: { isRequired: false } }),
+      is_active: checkbox({
+        defaultValue: true,
+      }),
     },
     ui: {
       listView: {

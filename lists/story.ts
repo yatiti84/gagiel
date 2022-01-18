@@ -42,6 +42,9 @@ export const story = list ({
 		],
 		defaultValue: 'none',
 	  }),
+      is_active: checkbox({
+        defaultValue: true,
+      }),
     },
     ui: {
       listView: {
