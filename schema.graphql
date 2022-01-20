@@ -803,6 +803,13 @@ type Member {
     skip: Int! = 0
   ): [Comment!]
   commentCount(where: CommentWhereInput! = {}): Int
+  member_like(
+    where: CommentWhereInput! = {}
+    orderBy: [CommentOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Comment!]
+  member_likeCount(where: CommentWhereInput! = {}): Int
   follower(
     where: MemberWhereInput! = {}
     orderBy: [MemberOrderByInput!]! = []
@@ -858,6 +865,7 @@ input MemberWhereInput {
   verified: BooleanFilter
   pick: PickManyRelationFilter
   comment: CommentManyRelationFilter
+  member_like: CommentManyRelationFilter
   follower: MemberManyRelationFilter
   following: MemberManyRelationFilter
   following_category: CategoryManyRelationFilter
@@ -910,6 +918,7 @@ input MemberUpdateInput {
   verified: Boolean
   pick: PickRelateToManyForUpdateInput
   comment: CommentRelateToManyForUpdateInput
+  member_like: CommentRelateToManyForUpdateInput
   follower: MemberRelateToManyForUpdateInput
   following: MemberRelateToManyForUpdateInput
   following_category: CategoryRelateToManyForUpdateInput
@@ -960,6 +969,7 @@ input MemberCreateInput {
   verified: Boolean
   pick: PickRelateToManyForCreateInput
   comment: CommentRelateToManyForCreateInput
+  member_like: CommentRelateToManyForCreateInput
   follower: MemberRelateToManyForCreateInput
   following: MemberRelateToManyForCreateInput
   following_category: CategoryRelateToManyForCreateInput
@@ -994,6 +1004,13 @@ type Comment {
   content: String
   parent: Comment
   root: Comment
+  like(
+    where: MemberWhereInput! = {}
+    orderBy: [MemberOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Member!]
+  likeCount(where: MemberWhereInput! = {}): Int
   state: String
   published_date: DateTime
   is_active: Boolean
@@ -1013,6 +1030,7 @@ input CommentWhereInput {
   content: StringFilter
   parent: CommentWhereInput
   root: CommentWhereInput
+  like: MemberManyRelationFilter
   state: StringNullableFilter
   published_date: DateTimeNullableFilter
   is_active: BooleanFilter
@@ -1032,6 +1050,7 @@ input CommentUpdateInput {
   content: String
   parent: CommentRelateToOneForUpdateInput
   root: CommentRelateToOneForUpdateInput
+  like: MemberRelateToManyForUpdateInput
   state: String
   published_date: DateTime
   is_active: Boolean
@@ -1048,6 +1067,7 @@ input CommentCreateInput {
   content: String
   parent: CommentRelateToOneForCreateInput
   root: CommentRelateToOneForCreateInput
+  like: MemberRelateToManyForCreateInput
   state: String
   published_date: DateTime
   is_active: Boolean

@@ -39,6 +39,10 @@ export const member = list ({
 	    ref: 'Comment',
 		many: true,
 	  }),
+	  member_like: relationship({
+	    ref: 'Comment.like',
+		many: true,
+	  }),
 	  follower: relationship({
 	    ref: 'Member.following',
 		many: true,

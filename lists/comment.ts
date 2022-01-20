@@ -16,6 +16,7 @@ export const comment = list ({
       content: text({ validation: { isRequired: false } }),
 	  parent: relationship({ ref: 'Comment', many: false }),
 	  root: relationship({ ref: 'Comment', many: false }),
+	  like: relationship({ ref: 'Member.member_like', many: true }),
 	  state: select({
 		label: '狀態',
 		datatype: 'enum',

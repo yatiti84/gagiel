@@ -163,6 +163,7 @@ model Member {
   verified                         Boolean             @default(false)
   pick                             Pick[]              @relation("Member_pick")
   comment                          Comment[]           @relation("Member_comment")
+  member_like                      Comment[]           @relation("Comment_like")
   follower                         Member[]            @relation("Member_follower")
   following                        Member[]            @relation("Member_follower")
   following_category               Category[]          @relation("Member_following_category")
@@ -189,6 +190,7 @@ model Comment {
   parentId                Int?         @map("parent")
   root                    Comment?     @relation("Comment_root", fields: [rootId], references: [id])
   rootId                  Int?         @map("root")
+  like                    Member[]     @relation("Comment_like")
   state                   String?      @default("public")
   published_date          DateTime?
   is_active               Boolean      @default(true)
